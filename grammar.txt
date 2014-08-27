@@ -1,0 +1,10 @@
+thenop   :: '->'
+negop    :: '-'
+andop    :: '^'
+orop     :: 'V' | 'v'
+variable :: 'P' | 'Q' | 'R' | 'S'
+negatom  :: negop atom
+atom     :: negatom | variable | '(' expr ')'
+factor   :: atom [ thenop factor ]*
+term     :: factor [ andop factor ]*
+expr     :: term [ orop term]*
