@@ -2,15 +2,15 @@ __author__ = 'christianvelez'
 from itertools import product
 
 
-class hashdict(dict):
+class HashDict(dict):
 	"""
 	hashable dict implementation, suitable for use as a key into
 	other dicts.
 
-		>>> h1 = hashdict({"apples": 1, "bananas":2})
-		>>> h2 = hashdict({"bananas": 3, "mangoes": 5})
+		>>> h1 = HashDict({"apples": 1, "bananas":2})
+		>>> h2 = HashDict({"bananas": 3, "mangoes": 5})
 		>>> h1+h2
-		hashdict(apples=1, bananas=3, mangoes=5)
+		HashDict(apples=1, bananas=3, mangoes=5)
 		>>> d1 = {}
 		>>> d1[h1] = "salad"
 		>>> d1[h1]
@@ -18,7 +18,7 @@ class hashdict(dict):
 		>>> d1[h2]
 		Traceback (most recent call last):
 		...
-		KeyError: hashdict(bananas=3, mangoes=5)
+		KeyError: HashDict(bananas=3, mangoes=5)
 
 	based on answers from
 	   http://stackoverflow.com/questions/1151658/python-hashable-dicts
@@ -55,7 +55,7 @@ class hashdict(dict):
 		raise TypeError("{0} does not support item assignment"
 						.format(self.__class__.__name__))
 	def __add__(self, right):
-		result = hashdict(self)
+		result = HashDict(self)
 		dict.update(result, right)
 		return result
 
@@ -86,7 +86,7 @@ def find_vars(ast, d=set()):
 			d.add(v)
 		return d
 	else:
-		if ast.name in set(['AndExpr', 'OrExpr', 'ThenExpr']):
+		if ast.name in {'AndExpr', 'OrExpr', 'ThenExpr'}:
 			find_vars(ast.lexpr, d)
 			find_vars(ast.rexpr, d)
 			return d
@@ -95,7 +95,7 @@ def find_vars(ast, d=set()):
 
 def eval(ast, vars='pq'):
 	tt = permutations_for_variables(vars)
-	return [{hashdict(k): reval(ast, k)} for k in tt]
+	return [{HashDict(k): reval(ast, k)} for k in tt]
 
 if __name__ == '__main__':
 	import tree
