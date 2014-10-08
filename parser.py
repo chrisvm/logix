@@ -34,7 +34,7 @@ class Parser(object):
 		thenop = Literal('->')
 		negop  = Literal('-')
 		andop  = Literal('^')
-		orop   = CaselessLiteral("V")
+		orop   = CaselessLiteral("V") | CaselessLiteral("X")
 		variable = Word(self.variables, max=1)
 		lpar = Literal('(').suppress()
 		rpar = Literal(')').suppress()
