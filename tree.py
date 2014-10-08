@@ -16,7 +16,9 @@ def create(l):
 			return ThenExpr(create(l[0]), create(l[2:]))
 		if l[1] == 'V' or l[1] == 'v':
 			#print('created_orexpr')
-			return OrExpr(create(l[0]), create(l[2:]))
+			return OrExpr(create(l[0]), create(l[2:]), exclusive=False)
+		if  l[1] == 'X' or l[1] == 'x':
+			return OrExpr(create(l[0]), create(l[2:]), exclusive=True)
 		if l[1] == '^':
 			#print('created_ifexpr')
 			return AndExpr(create(l[0]), create(l[2:]))
