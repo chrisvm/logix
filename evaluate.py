@@ -71,7 +71,12 @@ def reval(ast, var):
 		return (not reval(ast.lexpr, var)) | reval(ast.rexpr, var)
 
 	if ast.name == 'OrExpr':
-		return (reval(ast.lexpr, var)) | (reval(ast.rexpr, var))
+		if ast.exclusive:
+			a = reval(ast.lexpr, var)
+			b = reval(ast.rexpr, var)
+			return (a or b) and (not (a and b))
+		else:
+			return (reval(ast.lexpr, var)) | (reval(ast.rexpr, var))
 
 	if ast.name == 'AndExpr':
 		return (reval(ast.lexpr, var)) and (reval(ast.rexpr, var))
@@ -100,7 +105,6 @@ def eval(ast, vars='pq'):
 if __name__ == '__main__':
 	import tree
 
-	#parsed = [['-', [['p', '->', 'q'], 'V', ['P', '->', 'S']]], '->', [['-', 'P'], '^', 'R', '^', 'S']]
 	parsed = ['p', '->', 'q']
 	ast = tree.create(parsed)
 
