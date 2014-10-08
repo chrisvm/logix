@@ -28,11 +28,12 @@ class ThenExpr(Node):
 		return "<%s l=%s r=%s>" % (self.name, repr(self.lexpr), repr(self.rexpr))
 
 class OrExpr(Node):
-	def __init__(self, lexpr=None, rexpr=None):
+	def __init__(self, lexpr=None, rexpr=None, exclusive=False):
 		Node.__init__(self, 'OrExpr')
 		self.lexpr = lexpr
 		self.rexpr = rexpr
-
+		self.exclusive = exclusive
+		
 	def __repr__(self):
 		return "<%s l=%s r=%s>" % (self.name, repr(self.lexpr), repr(self.rexpr))
 
