@@ -9,3 +9,4 @@ uses the pyparsing package.
 
   - add readline support (errors in the command line are permanent)
   - pretty printing the dict with the eval of a statement 
+  - error when ctrl-d'ing out of the program 
