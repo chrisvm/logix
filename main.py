@@ -25,9 +25,13 @@ def main():
 	atexit.register(readline.write_history_file, hist_file)
 
 	while True:
-		# Get input 
-		expr = input("> ")
-		
+		# Get input
+		try:
+			expr = input("> ")
+		except EOFError:
+			print('quit')
+			sys.exit()
+
 		# If input 'quit' or 'q', exit the program
 		if expr.lower() in {'quit', 'q'}:
 			sys.exit()
