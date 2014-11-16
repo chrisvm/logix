@@ -2,11 +2,28 @@ import tree
 import evaluate
 import pprint
 import sys
+import atexit
+import readline
+from os import path
 from parser import Parser
 
 
 def main():
+	# create the parser
 	parser = Parser()
+
+	# look for the history file
+	hist_file = path.join(path.expanduser('~'), '.logix_history')
+
+	# init history file
+	try:
+		readline.read_history_file(hist_file)
+	except FileNotFoundError:
+		pass
+
+	# set histort file save at end of execution
+	atexit.register(readline.write_history_file, hist_file)
+
 	while True:
 		# Get input 
 		expr = input("> ")
