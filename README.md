@@ -1,4 +1,4 @@
-logix
+pylogic
 =====
 
 Logix is a python module for parsing logic propositions, of the kind "p -> q", "p ^ q -> (q->p)", etc. 
